@@ -10,12 +10,12 @@ function App() {
   }, []);
 
   const fetchTodos = async () => {
-    const response = await axios.get("/api/todos");
+    const response = await axios.get("http://localhost:3001/api/todos");
     setTodos(response.data);
   };
 
   const addTodo = async () => {
-    const response = await axios.post("/api/todos", {
+    const response = await axios.post("http://localhost:3001/api/todos", {
       task: newTodo,
       completed: false,
     });
@@ -24,14 +24,14 @@ function App() {
   };
 
   const updateTodo = async (id, completed) => {
-    const response = await axios.put(`/api/todos/${id}`, {
+    const response = await axios.put(`http://localhost:3001/api/todos/${id}`, {
       completed: !completed,
     });
     setTodos(todos.map((todo) => (todo._id === id ? response.data : todo)));
   };
 
   const deleteTodo = async (id) => {
-    await axios.delete(`/api/todos/${id}`);
+    await axios.delete(`http://localhost:3001/api/todos/${id}`);
     setTodos(todos.filter((todo) => todo._id !== id));
   };
 
