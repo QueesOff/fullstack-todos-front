@@ -10,28 +10,38 @@ function App() {
   }, []);
 
   const fetchTodos = async () => {
-    const response = await axios.get("http://localhost:3001/api/todos");
+    const response = await axios.get(
+      "https://ec2-51-20-18-163.eu-north-1.compute.amazonaws.com/api/todos"
+    );
     setTodos(response.data);
   };
 
   const addTodo = async () => {
-    const response = await axios.post("http://localhost:3001/api/todos", {
-      task: newTodo,
-      completed: false,
-    });
+    const response = await axios.post(
+      "https://ec2-51-20-18-163.eu-north-1.compute.amazonaws.com/api/todos",
+      {
+        task: newTodo,
+        completed: false,
+      }
+    );
     setTodos([...todos, response.data]);
     setNewTodo("");
   };
 
   const updateTodo = async (id, completed) => {
-    const response = await axios.put(`http://localhost:3001/api/todos/${id}`, {
-      completed: !completed,
-    });
+    const response = await axios.put(
+      `https://ec2-51-20-18-163.eu-north-1.compute.amazonaws.com/api/todos/${id}`,
+      {
+        completed: !completed,
+      }
+    );
     setTodos(todos.map((todo) => (todo._id === id ? response.data : todo)));
   };
 
   const deleteTodo = async (id) => {
-    await axios.delete(`http://localhost:3001/api/todos/${id}`);
+    await axios.delete(
+      `https://ec2-51-20-18-163.eu-north-1.compute.amazonaws.com/api/todos/${id}`
+    );
     setTodos(todos.filter((todo) => todo._id !== id));
   };
 
